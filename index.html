@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="ffxiv.css">
+</head>
+<body>
+
+
+<div id="center-div">
+  <div id="textDiv">
+  <h1>Aloalo Zaratan Adds</h1>
+  <p id="text">Select your role on the right pannel!</p>
+  </div>
+  <div id="arena">
+
+      <div class="container">
+        <div class="square" id="1">1</div>
+        <div class="square" id="2">2</div>
+        <div class="square" id="3">3</div>  
+        <div class="square" id="4">4</div>
+        <div class="square" id="5">5</div>
+        <div class="square" id="6">6</div>  
+        <div class="square" id="7">7</div>
+        <div class="square" id="8">8</div>
+        <div class="square" id="9">9</div>
+        <div class="square" id="10">10</div>
+        <div class="square" id="11">11</div>
+        <div class="square" id="12">12</div>
+        <div class="square" id="13">13</div>
+        <div class="square" id="14">14</div>
+        <div class="square" id="15">15</div>
+        <div class="square" id="16">16</div>
+
+        <img id="north" class="worms" src="bug.png" alt="North">
+        <img id="south" class="worms" src="bug.png" alt="South">
+        <img id="east" class="worms" src="bug.png" alt="East">
+        <img id="west" class="worms" src="bug.png" alt="West">
+
+        <img id="way1" class="waymarks" src="way_1.png">
+        <img id="way2" class="waymarks" src="way_2.png">
+        <img id="way3" class="waymarks" src="way_3.png">
+        <img id="way4" class="waymarks" src="way_4.png">
+        <img id="waya" class="waymarks" src="way_a.png">
+        <img id="wayb" class="waymarks" src="way_b.png">
+        <img id="wayc" class="waymarks" src="way_c.png">
+        <img id="wayd" class="waymarks" src="way_d.png">
+        
+        <img id="bubble1" class="bubbles" src="bubbleIcon.png">
+        <img id="bubble2" class="bubbles" src="bubbleIcon.png">
+
+        <img class="arenaRoles" id="arenaTank" src="tank.png">
+        <img class="arenaRoles" id="arenaHealer" src="healer.png">
+        <img class="arenaRoles" id="arenaMelee" src="melee.png">
+        <img class="arenaRoles" id="arenaRanged" src="ranged.png">
+
+      </div>
+      <div id="rolesDiv">
+
+        <div class="rolDebuff" id="tankDiv">
+            <img class="roles" id="tank" src="tank.png">
+            <div  id="debuffTank"></div>
+        </div>
+        <div class="rolDebuff" id="healerDiv">
+            <img class="roles" id="healer" src="healer.png">
+            <div id="debuffHealer"></div>
+        </div>
+        <div class="rolDebuff" id="meleeDiv">
+          <img class="roles" id="melee" src="melee.png">
+          <div id="debuffMelee"></div>
+      </div>
+        <div class="rolDebuff" id="rangedDiv" >
+            <img class="roles" id="ranged" src="ranged.png">
+            <div id="debuffRanged"></div>
+        </div>
+        
+    </div>
+</div>
+</div>
+<script>
+  const roles = {
+    tank: "tank",
+    healer:"healer",
+    melee:"melee",
+    ranged:"ranged",
+  }
+  
+  var assignedRole = "";
+  console.log("Eres "+ assignedRole)
+
+
+
+  document.querySelectorAll(".roles").forEach(image=>{
+    image.addEventListener('click', (event => {
+      const clickedImageId = event.target.id;
+      assignedRole = roles[clickedImageId];
+      console.log("eres " +assignedRole);
+
+      switch (assignedRole){
+        case "healer":
+          document.getElementById("text").innerHTML="You are Healer! click the correct waymark to move to your safe spot"
+          document.getElementById("healerDiv").classList.add("healerSelected");
+          document.getElementById("tankDiv").classList.remove("tankSelected");
+          document.getElementById("meleeDiv").classList.remove("meleeSelected");
+          document.getElementById("rangedDiv").classList.remove("rangedSelected");
+        break;   
+        case "tank":
+          document.getElementById("text").innerHTML="You are Tank! click the correct waymark to move to your safe spot"
+          document.getElementById("tankDiv").classList.add("tankSelected");
+          document.getElementById("healerDiv").classList.remove("healerSelected");
+          document.getElementById("meleeDiv").classList.remove("meleeSelected");
+          document.getElementById("rangedDiv").classList.remove("rangedSelected"); 
+        break; 
+        case "melee":
+          document.getElementById("text").innerHTML="You are Melee! click the correct waymark to move to your safe spot"
+          document.getElementById("meleeDiv").classList.add("meleeSelected");
+          document.getElementById("tankDiv").classList.remove("tankSelected");
+          document.getElementById("healerDiv").classList.remove("healerSelected");
+          document.getElementById("rangedDiv").classList.remove("rangedSelected");
+        break;
+        case "ranged":
+          document.getElementById("text").innerHTML="You are Ranged! click the correct waymark to move to your safe spot"
+          document.getElementById("rangedDiv").classList.add("rangedSelected");
+          document.getElementById("tankDiv").classList.remove("tankSelected");
+          document.getElementById("healerDiv").classList.remove("healerSelected");
+          document.getElementById("meleeDiv").classList.remove("meleeSelected");
+          break;
+      }
+
+    }))
+  })
+  
+
+ 
+  let safeSpaces = ["UpDown", "Sides", "Corners"];
+  const randomIndex = Math.floor(Math.random() * safeSpaces.length);
+  const randomSafeSpace = safeSpaces[randomIndex];
+
+  let TankSafeNumber;
+  let HealerSafeNumber;
+  let MeleeSafeNumber;
+  let RangedSafeNumber;
+
+  ////////////////////////////////////  WAYMARKS  //////////////////////
+  const way1 = document.getElementById("way1");
+  const way2 = document.getElementById("way2");
+  const way3 = document.getElementById("way3");
+  const way4 = document.getElementById("way4");
+ 
+  //let randomSafeSpace = safeSpaces[2];
+  switch (randomSafeSpace){
+    case "UpDown":
+      document.getElementById("1").classList.add("danger");
+      document.getElementById("4").classList.add("danger");
+      document.getElementById("5").classList.add("danger");
+      document.getElementById("6").classList.add("danger");
+      document.getElementById("7").classList.add("danger");
+      document.getElementById("8").classList.add("danger");
+      document.getElementById("9").classList.add("danger");
+      document.getElementById("10").classList.add("danger");
+      document.getElementById("11").classList.add("danger");
+      document.getElementById("12").classList.add("danger");
+      document.getElementById("13").classList.add("danger");
+      document.getElementById("16").classList.add("danger");
+      break;
+
+    case "Sides":
+      document.getElementById("1").classList.add("danger");
+      document.getElementById("2").classList.add("danger");
+      document.getElementById("3").classList.add("danger");
+      document.getElementById("4").classList.add("danger");
+      document.getElementById("6").classList.add("danger");
+      document.getElementById("7").classList.add("danger");
+      document.getElementById("10").classList.add("danger");
+      document.getElementById("11").classList.add("danger");
+      document.getElementById("13").classList.add("danger");
+      document.getElementById("14").classList.add("danger");
+      document.getElementById("15").classList.add("danger");
+      document.getElementById("16").classList.add("danger");
+      break;
+    case "Corners":
+      document.getElementById("2").classList.add("danger");
+      document.getElementById("3").classList.add("danger");
+      document.getElementById("5").classList.add("danger");
+      document.getElementById("6").classList.add("danger");
+      document.getElementById("7").classList.add("danger");
+      document.getElementById("8").classList.add("danger");
+      document.getElementById("9").classList.add("danger");
+      document.getElementById("10").classList.add("danger");
+      document.getElementById("11").classList.add("danger");
+      document.getElementById("12").classList.add("danger");
+      document.getElementById("14").classList.add("danger");
+      document.getElementById("15").classList.add("danger");
+    }
+
+    let mechanicBubbles = ["1", "2", "3","4","5","6"]
+    const randomIndexBubble = Math.floor(Math.random() * mechanicBubbles.length);
+    const randomBubbles = mechanicBubbles[randomIndexBubble];
+
+    //const randomBubbles = "6"
+    const bubble1 = document.getElementById("bubble1");
+    const bubble2 = document.getElementById("bubble2")
+    
+
+    //ARRAYS
+    var assignedRoles= ["Tank", "Healer", "Melee", "Ranged"];
+    var bubblesDebuff= [];
+    var bindDebuff=[];
+    var safeNumber = 0;
+
+    ////////////////////////ASIGNAR LOS DEBUFFS////////////////////////////
+
+  function assignDebuff(){
+    let randomRole = Math.floor(Math.random() * assignedRoles.length);
+    bubblesDebuff.push(assignedRoles[randomRole]);
+    assignedRoles.splice(randomRole,1);
+
+    randomRole = Math.floor(Math.random() * assignedRoles.length);
+    bubblesDebuff.push(assignedRoles[randomRole]);
+    assignedRoles.splice(randomRole,1);
+
+    bindDebuff.push(assignedRoles);
+    assignedRoles=[];
+    
+    console.log(assignedRoles);
+    console.log(bubblesDebuff);
+    console.log(bindDebuff);
+  };
+  assignDebuff();
+  
+  if (bubblesDebuff.includes("Healer")){
+    document.getElementById("debuffHealer").classList.add("debuffBubble");
+      }else {
+        document.getElementById("debuffHealer").classList.add("debuffBind");
+  }
+  if (bubblesDebuff.includes("Tank")){
+    document.getElementById("debuffTank").classList.add("debuffBubble")
+    }else {
+      document.getElementById("debuffTank").classList.add("debuffBind");
+    }
+  if (bubblesDebuff.includes("Melee")){
+    document.getElementById("debuffMelee").classList.add("debuffBubble");
+    }else {
+      document.getElementById("debuffMelee").classList.add("debuffBind");
+    }
+  if (bubblesDebuff.includes("Ranged")){
+    document.getElementById("debuffRanged").classList.add("debuffBubble");
+    }else {
+    document.getElementById("debuffRanged").classList.add("debuffBind");
+    }
+
+    //////////////////////////////////////CASOS//////////////////////////
+
+  switch (randomBubbles){
+    case "1": //northWest
+      bubble1.style.top="26%"; 
+      bubble1.style.left="50%";
+      bubble2.style.top="50%";
+      bubble2.style.left="28%";
+      console.log("CASO 1. NORTHWEST")
+      //tank
+    
+        if (bubblesDebuff.includes("Tank")){
+          TankSafeNumber = 2
+          console.log("Tank goes 2")
+        } else {
+          TankSafeNumber = 1
+          console.log("Tank goes 1")
+        }
+      
+      //healer
+        //Si healer y tank tienen bubble debuff --> van a no burbuja
+        if (bubblesDebuff.includes("Healer") && bubblesDebuff.includes("Tank")){
+           HealerSafeNumber = 3;
+           console.log("Healer goes 3")
+        //Si healer tiene bubble pero tank no
+        } else if ((bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank"))){
+          HealerSafeNumber = 2;
+          console.log("Healer goes 2")
+        //Si healer tiene bind y tank tambien
+        }else if (!bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank")){
+          HealerSafeNumber = 4
+          console.log("Healer goes 4")
+        }
+        //Si healer tiene bind y tank no.
+        else {
+           HealerSafeNumber = 1;
+           console.log("Healer goes 1")
+        }
+      
+      //melee 
+        //Si melee tiene bubble y ranged tambien.
+        if(bubblesDebuff.includes("Melee") && bubblesDebuff.includes("Ranged")){
+           MeleeSafeNumber=2;
+           console.log("Melee goes 2")
+        //Si melee tiene bubble y ranged  no
+        }else if (bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber=3;
+           console.log("Melee goes 3")
+        //Si melee y ranged tienen bind
+        }else if (!bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber=1;
+           console.log("Melee goes 1")
+        //Si melee tiene bind y ranged tiene bubble
+        }else{
+           MeleeSafeNumber=4;
+           console.log("Melee goes 4")
+        }
+      
+      //ranged 
+        //Si ranged y melee tienen burbuja
+        if (bubblesDebuff.includes("Ranged") && bubblesDebuff.includes("Melee"))  {
+            RangedSafeNumber=3;
+            console.log("Ranged goes 3");}
+            //Si ranged tiene bubble y melee tiene bind
+            else if (bubblesDebuff.includes("Ranged") && !bubblesDebuff.includes("Melee")){
+            RangedSafeNumber=3;
+            console.log("Ranged goes 3");
+            }
+            //Si ranged y melee tienen bind
+            else if (!bubblesDebuff.includes("Ranged")&& !bubblesDebuff.includes("Melee") ){
+            RangedSafeNumber=4;
+            console.log("Ranged goes 4");
+            }
+
+       else{
+          RangedSafeNumber=4;
+          console.log("Ranged goes 4")
+      }
+    
+      break;
+    case "2": //NorthSouth
+      bubble1.style.top="26%"; 
+      bubble1.style.left="50%";
+      bubble2.style.bottom="15%";
+      bubble2.style.left="50%";
+      console.log("CASO 2. NORTHSOUTH")
+
+      //tank
+    
+      if (bubblesDebuff.includes("Tank")){
+          TankSafeNumber = 2
+          console.log("Tank goes 2")
+        } else {
+          TankSafeNumber = 1
+          console.log("Tank goes 1")
+        }
+
+      //healer 
+       //Si healer y tank tienen bubble debuff --> van a no burbuja
+       if (bubblesDebuff.includes("Healer") && bubblesDebuff.includes("Tank")){
+           HealerSafeNumber = 4;
+           console.log("Healer goes 4")
+        //Si healer tiene bubble pero tank no
+        } else if ((bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank"))){
+          HealerSafeNumber = 2;
+          console.log("Healer goes 2")
+        //Si healer tiene bind y tank tambien
+        }else if (!bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank")){
+          HealerSafeNumber = 3
+          console.log("Healer goes 3")
+        }
+        //Si healer tiene bind y tank no.
+        else {
+           HealerSafeNumber = 1;
+           console.log("Healer goes 1")
+        }
+
+        //melee 
+        //Si melee tiene bubble y ranged tambien.
+        if(bubblesDebuff.includes("Melee") && bubblesDebuff.includes("Ranged")){
+           MeleeSafeNumber = 2;
+           console.log("Melee goes 2")
+        //Si melee tiene bubble y ranged  no
+        }else if (bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 4;
+           console.log("Melee goes 4")
+        //Si melee y ranged tienen bind
+        }else if (!bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 1;
+           console.log("Melee goes 1")
+        //Si melee tiene bind y ranged tiene bubble
+        }else{
+           MeleeSafeNumber = 3;
+           console.log("Melee goes 3")
+        }
+        //ranged 
+        //Si ranged y melee tienen burbuja
+        if (bubblesDebuff.includes("Ranged") && bubblesDebuff.includes("Melee"))  {
+            RangedSafeNumber = 4;
+            console.log("Ranged goes 4");}
+            //Si ranged tiene bubble y melee tiene bind
+            else if (bubblesDebuff.includes("Ranged") && !bubblesDebuff.includes("Melee")){
+            RangedSafeNumber = 4;
+            console.log("Ranged goes 4");
+            }
+            //Si ranged y melee tienen bind
+            else if (!bubblesDebuff.includes("Ranged")&& !bubblesDebuff.includes("Melee") ){
+            RangedSafeNumber=3;
+            console.log("Ranged goes 3");
+            }
+            //si ranged tiene bind y melee tiene bubble
+       else{
+          RangedSafeNumber = 3;
+          console.log("Ranged goes 3")
+      }
+      
+      break;
+    case "3": //NorthEast
+      bubble1.style.top= "26%"; 
+      bubble1.style.left= "50%";
+      bubble2.style.top="50%";
+      bubble2.style.left="72%";
+      console.log("CASO 3. NORTHEAST")
+      //tank
+      //Si tank tiene burbuja
+      if (bubblesDebuff.includes("Tank")){
+          TankSafeNumber = 3
+          console.log("Tank goes 3")
+      //si tank tiene bind
+        } else {
+          TankSafeNumber = 1
+          console.log("Tank goes 1")
+        }
+
+      //healer 
+       //Si healer y tank tienen bubble debuff --> van a no burbuja
+       if (bubblesDebuff.includes("Healer") && bubblesDebuff.includes("Tank")){
+           HealerSafeNumber = 4;
+           console.log("Healer goes 4")
+        //Si healer tiene bubble pero tank no
+        } else if ((bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank"))){
+          HealerSafeNumber = 3;
+          console.log("Healer goes 3")
+        //Si healer tiene bind y tank tambien
+        }else if (!bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank")){
+          HealerSafeNumber = 2
+          console.log("Healer goes 2")
+        }
+        //Si healer tiene bind y tank no.
+        else {
+           HealerSafeNumber = 1;
+           console.log("Healer goes 1")
+        }
+
+        //melee 
+        //Si melee tiene bubble y ranged tambien.
+        if(bubblesDebuff.includes("Melee") && bubblesDebuff.includes("Ranged")){
+           MeleeSafeNumber= 3;
+           console.log("Melee goes 3")
+        //Si melee tiene bubble y ranged  no
+        }else if (bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber= 4;
+           console.log("Melee goes 4")
+        //Si melee y ranged tienen bind
+        }else if (!bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 1;
+           console.log("Melee goes 1")
+        //Si melee tiene bind y ranged tiene bubble
+        }else{
+           MeleeSafeNumber = 2;
+           console.log("Melee goes 2")
+        }
+        //ranged 
+        //Si ranged y melee tienen burbuja
+        if (bubblesDebuff.includes("Ranged") && bubblesDebuff.includes("Melee"))  {
+            RangedSafeNumber = 4;
+            console.log("Ranged goes 4");}
+            //Si ranged tiene bubble y melee tiene bind
+            else if (bubblesDebuff.includes("Ranged") && !bubblesDebuff.includes("Melee")){
+            RangedSafeNumber = 4;
+            console.log("Ranged goes 4");
+            }
+            //Si ranged y melee tienen bind
+            else if (!bubblesDebuff.includes("Ranged")&& !bubblesDebuff.includes("Melee") ){
+            RangedSafeNumber = 2;
+            console.log("Ranged goes 2");
+            }
+            //si ranged tiene bind y melee tiene bubble ///////ESTE NO VA////////
+            else if(!bubblesDebuff.includes("Ranged")&& bubblesDebuff.includes("Melee")){
+            RangedSafeNumber = 2;
+            console.log("Ranged goes 2")
+            }
+            
+      break;
+    case "4": //EastSouth
+      bubble1.style.top="50%"
+      bubble1.style.right="15%"
+      bubble2.style.bottom="14%";
+      bubble2.style.left="50%";
+      console.log("CASO 6. SOUTHEAST")
+
+       //tank
+            //si tank tiene burbuja
+       if (bubblesDebuff.includes("Tank")){
+          TankSafeNumber = 1
+          console.log("Tank goes 1")
+            //si tank tiene bind
+        } else {
+          TankSafeNumber = 2
+          console.log("Tank goes 2")
+        }
+
+      //healer 
+       //Si healer y tank tienen bubble debuff --> van a no burbuja
+       if (bubblesDebuff.includes("Healer") && bubblesDebuff.includes("Tank")){
+           HealerSafeNumber = 4;
+           console.log("Healer goes 4")
+        //Si healer tiene bubble pero tank no
+        } else if ((bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank"))){
+          HealerSafeNumber = 1;
+          console.log("Healer goes 1")
+        //Si healer tiene bind y tank tambien
+        }else if (!bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank")){
+          HealerSafeNumber = 3
+          console.log("Healer goes 3")
+        }
+        //Si healer tiene bind y tank no.
+        else {
+           HealerSafeNumber = 2;
+           console.log("Healer goes 2")
+        }
+
+        //melee 
+        //Si melee tiene bubble y ranged tambien.
+        if(bubblesDebuff.includes("Melee") && bubblesDebuff.includes("Ranged")){
+           MeleeSafeNumber = 1;
+           console.log("Melee goes 1")
+        //Si melee tiene bubble y ranged  no
+        }else if (bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 4;
+           console.log("Melee goes 4")
+        //Si melee y ranged tienen bind
+        }else if (!bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 2;
+           console.log("Melee goes 2")
+        //Si melee tiene bind y ranged tiene bubble
+        }else{
+           MeleeSafeNumber = 3;
+           console.log("Melee goes 3")
+        }
+        //ranged 
+        //Si ranged y melee tienen burbuja
+        if (bubblesDebuff.includes("Ranged") && bubblesDebuff.includes("Melee"))  {
+            RangedSafeNumber = 4;
+            console.log("Ranged goes 4");}
+            //Si ranged tiene bubble y melee tiene bind
+            else if (bubblesDebuff.includes("Ranged") && !bubblesDebuff.includes("Melee")){
+            RangedSafeNumber = 4;
+            console.log("Ranged goes 4");
+            }
+            //Si ranged y melee tienen bind
+            else if (!bubblesDebuff.includes("Ranged")&& !bubblesDebuff.includes("Melee") ){
+            RangedSafeNumber = 3;
+            console.log("Ranged goes 3");
+            }
+            //si ranged tiene bind y melee tiene bubble
+       else{
+          RangedSafeNumber = 3;
+          console.log("Ranged goes 3")
+      }
+      break;
+    case "5":  //EastWest
+      bubble1.style.top="50%";
+      bubble1.style.right="15%";
+      bubble2.style.top="50%";
+      bubble2.style.left="28%";
+      console.log("CASO 5. EASTWEST")
+       //tank
+          //si tank tiene burbuja
+       if (bubblesDebuff.includes("Tank")){
+          TankSafeNumber = 1
+          console.log("Tank goes 1")
+          //si tank tiene bind
+        } else {
+          TankSafeNumber = 2
+          console.log("Tank goes 2")
+        }
+
+      //healer 
+       //Si healer y tank tienen bubble debuff --> van a no burbuja
+       if (bubblesDebuff.includes("Healer") && bubblesDebuff.includes("Tank")){
+           HealerSafeNumber = 3;
+           console.log("Healer goes 3")
+        //Si healer tiene bubble pero tank no
+        } else if ((bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank"))){
+          HealerSafeNumber = 1;
+          console.log("Healer goes 1")
+        //Si healer tiene bind y tank tambien
+        }else if (!bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank")){
+          HealerSafeNumber = 4
+          console.log("Healer goes 4")
+        }
+        //Si healer tiene bind y tank no.
+        else {
+           HealerSafeNumber = 2;
+           console.log("Healer goes 2")
+        }
+
+        //melee 
+        //Si melee tiene bubble y ranged tambien.
+        if(bubblesDebuff.includes("Melee") && bubblesDebuff.includes("Ranged")){
+           MeleeSafeNumber = 1;
+           console.log("Melee goes 1")
+        //Si melee tiene bubble y ranged  no
+        }else if (bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 3;
+           console.log("Melee goes 3")
+        //Si melee y ranged tienen bind
+        }else if (!bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 2;
+           console.log("Melee goes 2")
+        //Si melee tiene bind y ranged tiene bubble
+        }else{
+           MeleeSafeNumber = 4;
+           console.log("Melee goes 4")
+        }
+        //ranged 
+        //Si ranged y melee tienen burbuja
+        if (bubblesDebuff.includes("Ranged") && bubblesDebuff.includes("Melee"))  {
+            RangedSafeNumber = 3 ;
+            console.log("Ranged goes 3");}
+            //Si ranged tiene bubble y melee tiene bind
+            else if (bubblesDebuff.includes("Ranged") && !bubblesDebuff.includes("Melee")){
+            RangedSafeNumber = 3;
+            console.log("Ranged goes 3");
+            }
+            //Si ranged y melee tienen bind
+            else if (!bubblesDebuff.includes("Ranged")&& !bubblesDebuff.includes("Melee") ){
+            RangedSafeNumber = 4;
+            console.log("Ranged goes 4");
+            }
+            //si ranged tiene bind y melee tiene bubble
+       else{
+          RangedSafeNumber = 4;
+          console.log("Ranged goes 4")
+      }
+      break;
+    case "6": //SouthWest
+      bubble1.style.bottom="15%";
+      bubble1.style.left="50%";
+      bubble2.style.top="50%";
+      bubble2.style.left="27%";
+      console.log("CASO 6. SOUTHWEST")
+       //tank
+      //si tank tiene bubble
+       if (bubblesDebuff.includes("Tank")){
+          TankSafeNumber = 1
+          console.log("Tank goes 1")
+        //si tank tiene bubble
+        } else {
+          TankSafeNumber = 3
+          console.log("Tank goes 3")
+        }
+
+      //healer 
+       //Si healer y tank tienen bubble debuff --> van a no burbuja
+       if (bubblesDebuff.includes("Healer") && bubblesDebuff.includes("Tank")){
+           HealerSafeNumber = 2;
+           console.log("Healer goes 2")
+        //Si healer tiene bubble pero tank no
+        } else if ((bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank"))){
+          HealerSafeNumber = 1;
+          console.log("Healer goes 1")
+        //Si healer tiene bind y tank tambien
+        }else if (!bubblesDebuff.includes("Healer") && !bubblesDebuff.includes("Tank")){
+          HealerSafeNumber = 4
+          console.log("Healer goes 4")
+        }
+        //Si healer tiene bind y tank no.
+        else {
+           HealerSafeNumber = 3;
+           console.log("Healer goes 3")
+        }
+
+        //melee 
+        //Si melee tiene bubble y ranged tambien.
+        if(bubblesDebuff.includes("Melee") && bubblesDebuff.includes("Ranged")){
+           MeleeSafeNumber = 1;
+           console.log("Melee goes 1")
+        //Si melee tiene bubble y ranged  no
+        }else if (bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 2;
+           console.log("Melee goes 2")
+        //Si melee y ranged tienen bind
+        }else if (!bubblesDebuff.includes("Melee") && !bubblesDebuff.includes("Ranged")) {
+           MeleeSafeNumber = 3;
+           console.log("Melee goes 3")
+        //Si melee tiene bind y ranged tiene bubble
+        }else{
+           MeleeSafeNumber = 4;
+           console.log("Melee goes 4")
+        }
+        //ranged 
+        //Si ranged y melee tienen burbuja //////NO VA
+        if (bubblesDebuff.includes("Ranged") && bubblesDebuff.includes("Melee"))  {
+            RangedSafeNumber = 2;
+            console.log("Ranged goes 2");}
+            //Si ranged tiene bubble y melee tiene bind ////////NO VA
+            else if (bubblesDebuff.includes("Ranged") && !bubblesDebuff.includes("Melee")){
+            RangedSafeNumber = 2;
+            console.log("Ranged goes 2");
+            }
+            //Si ranged y melee tienen bind
+            else if (!bubblesDebuff.includes("Ranged")&& !bubblesDebuff.includes("Melee") ){
+            RangedSafeNumber = 4;
+            console.log("Ranged goes 4");
+            }
+            //si ranged tiene bind y melee tiene bubble
+       else{
+          RangedSafeNumber = 4;
+          console.log("Ranged goes 4")
+      }
+      break;
+  }
+  
+  way1.addEventListener("click", function() {
+      if(assignedRole=="tank" && TankSafeNumber == 1){
+        console.log("TANK OLEEEE");
+
+       // setTimeout(changePhase, 2000);
+
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo1Corners("arenaTank");
+              break;
+          case "UpDown":
+              moveImageTo1UpDown("arenaTank");
+              break;
+          case "Sides": 
+              moveImageTo1Sides("arenaTank");
+              break;
+        }
+        
+      }else if (assignedRole=="healer" && HealerSafeNumber == 1){
+        console.log("HEALER OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo1Corners("arenaHealer");
+              break;
+          case "UpDown":
+              moveImageTo1UpDown("arenaHealer");
+              break;
+          case "Sides": 
+              moveImageTo1Sides("arenaHealer");
+        }
+      }else if (assignedRole=="melee" && MeleeSafeNumber == 1){
+        console.log("MELEE OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo1Corners("arenaMelee");
+              break;
+          case "UpDown":
+              moveImageTo1UpDown("arenaMelee");
+              break;
+          case "Sides": 
+              moveImageTo1Sides("arenaMelee");
+        }
+      }else if (assignedRole=="ranged" && RangedSafeNumber == 1){
+        console.log("RANGED OLEEE");
+
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo1Corners("arenaRanged");
+              break;
+          case "UpDown":
+              moveImageTo1UpDown("arenaRanged");
+              break;
+          case "Sides": 
+              moveImageTo1Sides("arenaRanged");
+              break;
+        }
+      }
+      else {
+        console.log("tehasequivocao");
+      }
+
+    });
+    way2.addEventListener("click", function() {
+      if(assignedRole=="tank" && TankSafeNumber == 2){
+        console.log("TANK OLEEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo2Corners("arenaTank");
+              break;
+          case "UpDown":
+              moveImageTo2UpDown("arenaTank");
+              break;
+          case "Sides": 
+              moveImageTo2Sides("arenaTank");
+              break;
+        }
+      }else if (assignedRole=="healer" && HealerSafeNumber == 2){
+        console.log("HEALER OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo2Corners("arenaHealer");
+              break;
+          case "UpDown":
+              moveImageTo2UpDown("arenaHealer");
+              break;
+          case "Sides": 
+              moveImageTo2Sides("arenaHealer");
+              break;
+        }
+      }else if (assignedRole=="melee" && MeleeSafeNumber == 2){
+        console.log("MELEE OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo2Corners("arenaMelee");
+              break;
+          case "UpDown":
+              moveImageTo2UpDown("arenaMelee");
+              break;
+          case "Sides": 
+              moveImageTo2Sides("arenaMelee");
+              break;
+        }
+      }else if (assignedRole=="ranged" && RangedSafeNumber == 2){
+        console.log("RANGED OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo2Corners("arenaRanged");
+              break;
+          case "UpDown":
+              moveImageTo2UpDown("arenaRanged");
+              break;
+          case "Sides": 
+              moveImageTo2Sides("arenaRanged");
+              break;
+        }}
+      else {
+        console.log("tehasequivocao");
+      }
+    });
+    way3.addEventListener("click", function() {
+      if(assignedRole=="tank" && TankSafeNumber == 3){
+        console.log("TANK OLEEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo3Corners("arenaTank");
+              break;
+          case "UpDown":
+              moveImageTo3Updown("arenaTank");
+              break;
+          case "Sides": 
+              moveImageTo3Sides("arenaTank");
+              break;
+        }
+      }else if (assignedRole=="healer" && HealerSafeNumber == 3){
+        console.log("HEALER OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo3Corners("arenaHealer");
+              break;
+          case "UpDown":
+              moveImageTo3Updown("arenaHealer");
+              break;
+          case "Sides": 
+              moveImageTo3Sides("arenaHealer");
+              break;
+        }
+      }else if (assignedRole=="melee" && MeleeSafeNumber == 3){
+        console.log("MELEE OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo3Corners("arenaMelee");
+              break;
+          case "UpDown":
+              moveImageTo3Updown("arenaMelee");
+              break;
+          case "Sides": 
+              moveImageTo3Sides("arenaMelee");
+            break;
+        }
+      }else if (assignedRole=="ranged" && RangedSafeNumber == 3){
+        console.log("RANGED OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo3Corners("arenaRanged");
+              break;
+          case "UpDown":
+              moveImageTo3Updown("arenaRanged");
+              break;
+          case "Sides": 
+              moveImageTo3Sides("arenaRanged");
+              break;
+        }
+
+      }
+      else {
+        console.log("tehasequivocao");
+      }
+    });
+    way4.addEventListener("click", function() {
+      if(assignedRole=="tank" && TankSafeNumber == 4){
+        console.log("TANK OLEEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo4Corners("arenaTank");
+              break;
+          case "UpDown":
+              moveImageTo4Updown("arenaTank");
+              break;
+          case "Sides": 
+              moveImageTo4Sides("arenaTank");
+              break;
+        }
+
+      }else if (assignedRole=="healer" && HealerSafeNumber == 4){
+        console.log("HEALER OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo4Corners("arenaHealer");
+              break;
+          case "UpDown":
+              moveImageTo4Updown("arenaHealer");
+              break;
+          case "Sides": 
+              moveImageTo4Sides("arenaHealer");
+              break;
+        }
+
+      }else if (assignedRole=="melee" && MeleeSafeNumber == 4){
+        console.log("MELEE OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo4Corners("arenaMelee");
+              break;
+          case "UpDown":
+              moveImageTo4Updown("arenaMelee");
+              break;
+          case "Sides": 
+              moveImageTo4Sides("arenaMelee");
+              break;
+        }
+
+      }else if (assignedRole=="ranged" && RangedSafeNumber == 4){
+        console.log("RANGED OLEEE");
+        switch (randomSafeSpace){
+          case "Corners":
+              moveImageTo4Corners("arenaRanged");
+              break;
+          case "UpDown":
+              moveImageTo4Updown("arenaRanged");
+              break;
+          case "Sides": 
+              moveImageTo4Sides("arenaRanged");
+              break;
+        }
+      }
+      else {
+        console.log("tehasequivocao");
+      }
+    });
+
+    /////////////MOVE IMAGE TO 1///////////
+
+    function moveImageTo1Sides(imageId) {
+          const image1 = document.getElementById(imageId);
+          image1.style.top = `${27}%`;
+          image1.style.left = `${23}%`;
+          }
+    function moveImageTo1Corners(imageId) {
+          const image1 = document.getElementById(imageId);
+          image1.style.top = `${23}%`;
+          image1.style.left = `${23}%`;
+          }
+    function moveImageTo1UpDown(imageId) {
+          const image1 = document.getElementById(imageId);
+          image1.style.top = `${23}%`;
+          image1.style.left = `${28}%`;
+          }
+
+    //////////MOVE IMAGE TO 2////////////////
+
+    function moveImageTo2Sides(imageId) {
+          const image2 = document.getElementById(imageId);
+          image2.style.top = `${28}%`;
+          image2.style.left = `${72}%`;
+          }
+    function moveImageTo2Corners(imageId) {
+          const image2 = document.getElementById(imageId);
+          image2.style.top = `${23}%`;
+          image2.style.left = `${72}%`;
+          }
+    function moveImageTo2UpDown(imageId) {
+          const image2 = document.getElementById(imageId);
+          image2.style.top = `${23}%`;
+          image2.style.left = `${67}%`;
+          }
+
+    ///////////////MOVE IMAGE TO 3/////////////////
+    function moveImageTo3Sides(imageId) {
+          const image3 = document.getElementById(imageId);
+          image3.style.top = `${68}%`; 
+          image3.style.left = `${72}%`;    
+        }
+    function moveImageTo3Corners(imageId) {
+          const image3 = document.getElementById(imageId);
+          image3.style.top = `${72}%`; 
+          image3.style.left = `${72}%`;    
+        }
+    function moveImageTo3Updown(imageId) {
+          const image3 = document.getElementById(imageId);
+          image3.style.top = `${73}%`; 
+          image3.style.left = `${67}%`;    
+        }
+    ////////////MOVE IMAGE TO 4///////////////////
+    function moveImageTo4Sides(imageId) {
+          const image4 = document.getElementById(imageId);
+          image4.style.left = `${23}%`;
+          image4.style.top = `${68}%`;
+        }
+    function moveImageTo4Corners(imageId) {
+          const image4 = document.getElementById(imageId);
+          image4.style.left = `${23}%`;
+          image4.style.top = `${72}%`;
+        }
+    function moveImageTo4Updown(imageId) {
+          const image4 = document.getElementById(imageId);
+          image4.style.left = `${28}%`;
+          image4.style.top = `${73}%`;
+        }
+    ///////// /MOVE IMAGE TO CARDINALS /////////////
+
+    function moveImageToA(imageId) {
+          const imageA = document.getElementById(imageId);
+          imageA.style.left = `${26}%`;
+          imageA.style.top = `${50}%`;
+        }
+        
+    function moveImageToB(imageId) {
+          const imageB = document.getElementById(imageId);
+          imageB.style.left = `${72}%`;
+          imageB.style.top = `${50}%`;
+        }
+    function moveImageToC(imageId){
+      const imageC = document.getElementById(imageId);
+          imageC.style.left = `${72}%`;
+          imageC.style.top = `${60}%`;
+    }
+    function moveImageToD(imageId){
+      const imageD = document.getElementById(imageId);
+          imageD.style.left = `${72}%`;
+          imageD.style.top = `${60}%`;
+    }
+
+    function changePhase(){
+      for (i=0;i<17;i++){
+        let element = document.getElementById(i.toString()); // Convertir el número a string
+        if (element) { // Asegurarse de que el elemento existe
+      element.classList.remove("danger");
+      }
+      
+    }}
+  
+</script>
+
+
+</body>
+</html>
+
+</html>
+
+

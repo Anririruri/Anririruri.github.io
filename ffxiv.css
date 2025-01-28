@@ -1,0 +1,213 @@
+
+body {
+  margin: 0;
+  height: 100vh; /* Altura completa de la ventana */
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  background-color:#2e3440;
+}
+#textDiv{
+  border-radius: 16px;
+  background-color: 	#eceff4;
+;
+}
+#center-div {
+  margin-top: 500px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #eceff4;
+  ;
+  text-align: center;
+  line-height: 100px; /* Alinear texto verticalmente dentro del div */
+  border-radius: 50px;
+  padding-bottom: 500px;
+}
+.container {
+    width: auto;
+    display: grid;
+    position:relative;
+    column-gap: 50px;
+    background-image: url('arena2.png') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    gap:0px;
+    width: 971px;
+    height: 960px;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas de igual tamaño */
+    grid-template-rows: repeat(4, 1fr); /* 4 filas de igual tamaño */
+    padding:60px;
+  }
+  #rolesDiv{
+      width: 160px;
+      display: flex;
+      flex-direction: column; /* Organiza las imágenes en una columna */
+      justify-content: center; /* Centra verticalmente las imágenes */
+      align-items: left; /* Centra horizontalmente las imágenes */
+      padding: 10px; /* Margen interno */
+    
+  }
+  #arena{
+    display: flex;
+      justify-content: flex-start; /* Espaciado entre los hijos */
+      align-items: flex-start; /* Alineación en el eje vertical */
+      gap: 20px; /* Espaciado opcional entre los elementos */
+      padding: 20px; /* Ajusta según lo necesario */
+  }
+  .roles{
+    height: 70px;
+    width: 70px;
+  }
+  .arenaRoles{
+    position: absolute;
+    width: 60px; /* Ajusta el tamaño */
+    height: 60px;
+    transition: left 0.5s ease, top 0.5s ease;
+  
+  }
+  .worms {
+    position: absolute;
+    width: 130px; /* Ajusta el tamaño */
+    height: 130px;
+    transform: translate(-50%, -50%);
+    ;
+  }
+  #arenaTank{
+    top: 37%; 
+    left: 47%;
+  }
+  #arenaHealer{
+    top: 47%; 
+    left: 57%;
+  }
+  #arenaMelee{
+    top: 47%; 
+    left: 38%;
+  }
+  #arenaRanged{
+    bottom: 37%; 
+    left: 47%;
+  }
+  .waymarks {
+    position: absolute;
+    width: 100px; /* Ajusta el tamaño */
+    height: 100px;
+    transform: translate(-50%, -50%);
+  }
+  .bubbles {
+    position: absolute;
+    width: 150px; /* Ajusta el tamaño */
+    height: 150px;
+    opacity: 40%;
+    transform: translate(-50%, -50%);
+    ;
+  }
+ /* #bubble1{ 
+    top: 26%; 
+    left: 50%;
+  }
+  #bubble2{
+    top:50%; 
+    right: 15%;
+  } */
+  .tankSelected {
+    background-color:   #aedbea;
+  }
+  .healerSelected{
+    background-color:   #aeeab3;
+  }
+  .meleeSelected{
+    background-color:   #eaaeae;
+
+  }
+  .rangedSelected{
+    background-color:   #eaaeae;
+
+  }
+  #way1 {
+    top: 26%; 
+    left: 28%;
+  }
+  #waya{
+    top:26%; 
+    left: 50%;
+  }
+  #way2 {
+    top:26%;
+    right: 18%;
+  }
+  #wayb{
+    top:50%; 
+    right: 19%;
+  }
+  #wayc{
+    top:73%; 
+    right: 40%;
+  }
+  #way3{
+    top:73%; 
+    right: 18%;
+  }
+  #wayd{
+    top:50%; 
+    left: 28%;
+  }
+  #way4{
+    top:73%; 
+    left: 28%;
+  }
+  
+  #north {
+    top: 26%; /* Norte */
+    left: 50%;
+  }
+  
+  #south {
+    bottom: 17%; /* Sur */
+    left: 50%;;
+  }
+  
+  #east {
+    top: 50%; /* Este */
+    right: 16%;
+  }
+  
+  #west {
+    top: 50%; /* Oeste */
+    left: 28%;
+  }
+  .container > div {
+    opacity: 30%;
+    border: 1px solid black;
+    font-size: 30px;
+    text-align: center;
+  }
+  .danger {
+      background-color:red;
+  }
+  .rolDebuff{
+      display: flex;
+      justify-content: flex-start; /* Espaciado entre los hijos */
+      align-items: flex-start; /* Alineación en el eje vertical */
+      padding-top: 28px; /* Ajusta según lo necesario */
+      padding-left: 20px;
+      border-radius: 15px;
+  }
+  
+  .debuffBubble{
+    opacity: 100%;
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-image: url('bubble.png');
+  }
+  .debuffBind{
+    opacity: 100%;
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-image: url('bind.png');
+  }
+  
+  
